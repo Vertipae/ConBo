@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPagerAdapter mAdapter;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,16 +25,20 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         // Adding fragments
-        mAdapter.AddFragment(new FragmentCalls(),"Calls");
-        mAdapter.AddFragment(new FragmentContact(),"Contact");
+        FragmentContact fc = new FragmentContact();
+        fc.initializeContactHelper(this);
+        mAdapter.AddFragment(fc,"Contact");
+        mAdapter.AddFragment(new FragmentAdd(),"Add");
         mAdapter.AddFragment(new FragmentAbout(),"About");
         mViewPager.setAdapter(mAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
 
         // Adding icons to tabLayout
-        mTabLayout.getTabAt(0).setIcon(R.drawable.ic_call);
-        mTabLayout.getTabAt(1).setIcon(R.drawable.ic_contact);
-        mTabLayout.getTabAt(2).setIcon(R.drawable.ic_check);
+
+        mTabLayout.getTabAt(0).setIcon(R.drawable.ic_person);
+        mTabLayout.getTabAt(1).setIcon(R.drawable.ic_person_add);
+        mTabLayout.getTabAt(2).setIcon(R.drawable.ic_info);
+
 
         //Remove Shadow From the action bar
         ActionBar actionBar = getSupportActionBar();

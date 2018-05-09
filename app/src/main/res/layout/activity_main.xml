@@ -7,7 +7,6 @@
     android:orientation="vertical"
     android:background="@color/backgroundForFragment"
     tools:context="android.example.com.conbo.MainActivity">
-
     <android.support.design.widget.TabLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,6 +22,5 @@
         android:layout_width="match_parent"
         android:id="@+id/viewpager">
     </android.support.v4.view.ViewPager>
-
 
 </LinearLayout>
