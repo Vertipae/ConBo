@@ -13,7 +13,6 @@ import android.widget.TextView;
 public class Splash extends AppCompatActivity {
 
 
-
     private TextView tv;
     private ImageView iv;
 
@@ -39,10 +38,9 @@ public class Splash extends AppCompatActivity {
             public void run() {
                 try {
                     sleep(5000);
-                }catch (InterruptedException e) {
+                } catch (InterruptedException e) {
                     e.printStackTrace();
-                }
-                finally {
+                } finally {
                     startActivity(intent);
                     finish();
                 }
