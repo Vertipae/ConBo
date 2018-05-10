@@ -120,12 +120,11 @@ public class ContactHelper extends SQLiteOpenHelper {
      * @param  name New word.
      * @return The id of the inserted word.
      */
-    public long insert(String name, String phone, int photo) {
+    public long insert(String name, String phone) {
         long newId = 0;
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, name);
         values.put(KEY_PHONE, phone);
-        values.put(KEY_PHOTO, photo);
         try {
             if (mWritableDB == null) {
                 mWritableDB = getWritableDatabase();

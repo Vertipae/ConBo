@@ -5,24 +5,24 @@
 
     <!-- For name -->
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/name_input_layout"
+        android:id="@+id/name_input_add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Name">
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/item_name"
+            android:id="@+id/item_name_add"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </android.support.design.widget.TextInputLayout>
 
     <!-- For phone -->
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/phone_input_layout"
+        android:id="@+id/phone_input_add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Phone Number">
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/item_phone"
+            android:id="@+id/item_phone_add"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </android.support.design.widget.TextInputLayout>

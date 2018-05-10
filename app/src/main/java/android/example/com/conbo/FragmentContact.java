@@ -23,8 +23,8 @@ public class FragmentContact extends Fragment{
     public FragmentContact() {
     }
 
-    public void initializeContactHelper(Context context) {
-        mData = new ContactHelper(context);
+    public void initializeContactHelper(ContactHelper contactHelper) {
+        mData = contactHelper;
     }
 
     @Nullable
