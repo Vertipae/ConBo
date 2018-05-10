@@ -1,6 +1,8 @@
 package android.example.com.conbo;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
@@ -25,6 +29,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
 
     Context mContext;
     ContactHelper mData;
+    //
 
     public ContactAdapter(Context mContext, ContactHelper mData) {
         this.mContext = mContext;
@@ -36,7 +41,22 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
 
         View v;
         v = LayoutInflater.from(mContext).inflate(R.layout.contact_item, parent, false);
-        MyViewHolder vHolder = new MyViewHolder(v);
+        final MyViewHolder vHolder = new MyViewHolder(v);
+
+
+        vHolder.contact_item.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                //
+                Intent intent = new Intent(mContext, ContactActivity.class);
+                intent.putExtra("name", vHolder.tv_name.getText());
+                intent.putExtra("phone", vHolder.tv_phone.getText());
+                mContext.startActivity(intent);
+
+
+            }
+        });
         return vHolder;
     }
 // Generate one row for recyclerview
@@ -59,14 +79,17 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-
+        //
+        private LinearLayout contact_item;
         private TextView tv_name;
         private TextView tv_phone;
         private ImageView img;
 
         public MyViewHolder(View itemView) {
-            super(itemView);
 
+            super(itemView);
+            //
+            contact_item = (LinearLayout) itemView.findViewById(R.id.contact_item_id);
             tv_name = (TextView) itemView.findViewById(R.id.contact_name);
             tv_phone = (TextView) itemView.findViewById(R.id.contact_phone);
             img = (ImageView) itemView.findViewById(R.id.img_contact);
