@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#651FFF</color>
+    <color name="colorPrimary">#212121</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="black">#000000</color>
     <color name="orangeWarm">#FF5252</color>
     <color name="orangeLight">#FF8A80</color>
     <color name="purpleLight">#D1C4E9</color>
-    <color name="purpleMore">#B2FF59</color>
-    <color name="purpleMoreMore">#651FFF</color>
-    <color name="backgroundForFragment">#C8E6C9</color>
+    <color name="purpleMore">#000000</color>
+    <color name="Grey">#212121</color>
+    <color name="lightgreen">#b9f6ca</color>
+    <color name="darkergreen">#69F0AE</color>
+    <color name="backgroundForFragment">#212121</color>
 </resources>
