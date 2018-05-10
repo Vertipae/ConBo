@@ -76,5 +76,5 @@
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
-    <string name="title_activity_contact">ContactActivity</string>
+    <string name="title_activity_contact">ConBo</string>
 </resources>

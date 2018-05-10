@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * Created by Salinaattori on 9.5.2018.
@@ -13,7 +14,8 @@ import android.view.ViewGroup;
 
 public class FragmentAdd extends Fragment{
 
-    View vCalls;
+    View vAdd;
+    Button mButton;
 
     public FragmentAdd() {
     }
@@ -21,7 +23,9 @@ public class FragmentAdd extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        vCalls = inflater.inflate(R.layout.add_fragment, container,false);
-        return vCalls;
+        vAdd = inflater.inflate(R.layout.add_fragment, container,false);
+
+        return vAdd;
     }
+
 }
