@@ -8,12 +8,17 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.amulyakhare.textdrawable.util.ColorGenerator;
+
+import java.io.Serializable;
+
 /**
  * Created by Salinaattori on 9.5.2018.
  */
 
 public class ContactHelper extends SQLiteOpenHelper {
     private static final String TAG = ContactHelper.class.getSimpleName();
+    private static ContactHelper sInstance;
 
     // Declaring all these as constants makes code a lot more readable, and looking like SQL.
 
@@ -43,7 +48,13 @@ public class ContactHelper extends SQLiteOpenHelper {
     private SQLiteDatabase mWritableDB;
     private SQLiteDatabase mReadableDB;
 
-    public ContactHelper(Context context) {
+    public static synchronized ContactHelper getInstance(Context context) {
+        if (sInstance == null) {
+            sInstance = new ContactHelper(context.getApplicationContext());
+        }
+        return sInstance;
+    }
+    private ContactHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         Log.d(TAG, "Construct ContactHelper");
     }
@@ -59,14 +70,16 @@ public class ContactHelper extends SQLiteOpenHelper {
     public void fillDatabaseWithData(SQLiteDatabase db) {
 
         ContactModel[] contacts = new ContactModel[2];
-        contacts[0] = new ContactModel("Kalevi", "0700123123", 3);
-        contacts[1] =  new ContactModel("Sari", "020126126", 5);
+        contacts[0] = new ContactModel("Seppo", "0700123123", 0,ColorGenerator.MATERIAL.getRandomColor());
+        contacts[1] =  new ContactModel("Sallamaarit", "020126126", 1, ColorGenerator.MATERIAL.getRandomColor());
         ContentValues values = new ContentValues();
 
         for (int i=0; i < contacts.length;i++) {
             // Put column/value pairs into the container. put() overwrites existing values.
+            values.put(KEY_ID, contacts[i].getmId());
             values.put(KEY_NAME, contacts[i].getmName());
             values.put(KEY_PHONE, contacts[i].getmPhone());
+            values.put(KEY_PHOTO, contacts[i].getmPhoto());
             db.insert(CONBO_TABLE, null, values);
         }
     }
@@ -89,8 +102,10 @@ public class ContactHelper extends SQLiteOpenHelper {
             if (mReadableDB == null) {mReadableDB = getReadableDatabase();}
             cursor = mReadableDB.rawQuery(query, null);
             cursor.moveToFirst();
+            entry.setmId(cursor.getInt(cursor.getColumnIndex(KEY_ID)));
             entry.setmName(cursor.getString(cursor.getColumnIndex(KEY_NAME)));
             entry.setmPhone(cursor.getString(cursor.getColumnIndex(KEY_PHONE)));
+            entry.setmPhoto(cursor.getInt(cursor.getColumnIndex(KEY_PHOTO)));
         } catch (Exception e) {
             Log.d(TAG, "QUERY EXCEPTION! " + e.getMessage());
         } finally {
@@ -125,6 +140,7 @@ public class ContactHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, name);
         values.put(KEY_PHONE, phone);
+        values.put(KEY_PHOTO, ColorGenerator.MATERIAL.getRandomColor());
         try {
             if (mWritableDB == null) {
                 mWritableDB = getWritableDatabase();
@@ -143,7 +159,7 @@ public class ContactHelper extends SQLiteOpenHelper {
      * @param name The new value of the name.
      * @return The number of rows affected or -1 of nothing was updated.
      */
-    public int update(int id, String name, String phone, int photo) {
+    public int update(int id, String name, String phone) {
         int mNumberOfRowsUpdated = -1;
         try {
             if (mWritableDB == null) {
@@ -152,7 +168,6 @@ public class ContactHelper extends SQLiteOpenHelper {
             ContentValues values = new ContentValues();
             values.put(KEY_NAME, name);
             values.put(KEY_PHONE, phone);
-            values.put(KEY_PHOTO, photo);
 
             mNumberOfRowsUpdated = mWritableDB.update(CONBO_TABLE, //table to change
                     values, // new values to insert

@@ -23,16 +23,13 @@ public class FragmentContact extends Fragment{
     public FragmentContact() {
     }
 
-    public void initializeContactHelper(ContactHelper contactHelper) {
-        mData = contactHelper;
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mData = ContactHelper.getInstance(getContext());
         vContact = inflater.inflate(R.layout.contact_fragment, container, false);
         mRecyclerView = (RecyclerView) vContact.findViewById(R.id.contact_recyclerview);
-        ContactAdapter recyclerAdapter = new ContactAdapter(getContext(), mData);
+        ContactAdapter recyclerAdapter = new ContactAdapter(getContext());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(recyclerAdapter);
         return vContact;

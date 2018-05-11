@@ -24,15 +24,9 @@ public class MainActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         mAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        // Initializing contact helper and then passing it on to fragments
         // Added fragments to adapter
-        ContactHelper ch = new ContactHelper(this);
-        FragmentContact fc = new FragmentContact();
-        fc.initializeContactHelper(ch);
-        mAdapter.AddFragment(fc,"Contact");
-        FragmentAdd fa = new FragmentAdd();
-        fa.initializeContactHelper(ch);
-        mAdapter.AddFragment(fa,"Add");
+        mAdapter.AddFragment(new FragmentContact(),"Contact");
+        mAdapter.AddFragment(new FragmentAdd(),"Add");
         mAdapter.AddFragment(new FragmentAbout(),"About");
         mViewPager.setAdapter(mAdapter);
         mTabLayout.setupWithViewPager(mViewPager);

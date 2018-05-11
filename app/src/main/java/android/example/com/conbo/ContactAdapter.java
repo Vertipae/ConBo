@@ -31,9 +31,9 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
     ContactHelper mData;
     //
 
-    public ContactAdapter(Context mContext, ContactHelper mData) {
+    public ContactAdapter(Context mContext) {
         this.mContext = mContext;
-        this.mData = mData;
+        this.mData = ContactHelper.getInstance(mContext);
     }
 
     @Override
@@ -48,8 +48,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
 
             @Override
             public void onClick(View v) {
-                //
                 Intent intent = new Intent(mContext, ContactActivity.class);
+                intent.putExtra("id", vHolder.getmId());
                 intent.putExtra("name", vHolder.tv_name.getText());
                 intent.putExtra("phone", vHolder.tv_phone.getText());
                 mContext.startActivity(intent);
@@ -63,10 +63,12 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         ContactModel current = mData.query(position);
+        holder.setmId(current.getmId());
+        holder.setmPhoto(current.getmPhoto());
         holder.tv_name.setText(current.getmName());
         holder.tv_phone.setText(current.getmPhone());
         // Generate icon according to first letter of name
-        TextDrawable letterDrawable = TextDrawable.builder().buildRound(String.valueOf(current.getmName().charAt(0)), ColorGenerator.MATERIAL.getRandomColor());
+        TextDrawable letterDrawable = TextDrawable.builder().buildRound(String.valueOf(current.getmName().charAt(0)), holder.getmPhoto());
         holder.img.setImageDrawable(letterDrawable);
         // Keep a reference to the view holder for the click listener
         // final WordViewHolder h = holder; // needs to be final for use in callback
@@ -84,6 +86,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
         private TextView tv_name;
         private TextView tv_phone;
         private ImageView img;
+        private int mId;
+        private int mPhoto;
 
         public MyViewHolder(View itemView) {
 
@@ -93,7 +97,22 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
             tv_name = (TextView) itemView.findViewById(R.id.contact_name);
             tv_phone = (TextView) itemView.findViewById(R.id.contact_phone);
             img = (ImageView) itemView.findViewById(R.id.img_contact);
+        }
 
+        public int getmId() {
+            return mId;
+        }
+
+        public void setmId(int mId) {
+            this.mId = mId;
+        }
+
+        public int getmPhoto() {
+            return mPhoto;
+        }
+
+        public void setmPhoto(int mPhoto) {
+            this.mPhoto = mPhoto;
         }
     }
 }

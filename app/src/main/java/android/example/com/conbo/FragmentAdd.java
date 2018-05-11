@@ -26,13 +26,10 @@ public class FragmentAdd extends Fragment{
     public FragmentAdd() {
     }
 
-    public void initializeContactHelper(ContactHelper contactHelper) {
-        mData = contactHelper;
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mData = ContactHelper.getInstance(getContext());
         vAdd = inflater.inflate(R.layout.add_fragment, container,false);
         mButton = vAdd.findViewById(R.id.add_button);
         mName = vAdd.findViewById(R.id.item_name_add);

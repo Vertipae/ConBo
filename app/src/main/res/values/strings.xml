@@ -77,4 +77,12 @@
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
     <string name="title_activity_contact">ConBo</string>
+    <string name="save">Save</string>
+    <string name="description_text">This app is for course R0316 Native Mobile Apps | 2018. Made by Sallamaarit Jaako, 1601459. This is a simple Contact Book with database. You can add, edit and delete contacts.</string>
+    <string name="description">Description</string>
+    <string name="contact">Contact</string>
+    <string name="contact_info">Sallamaarit.jaako@student.laurea.fi</string>
+    <string name="license">\n© Copyright 2018 Sallamaarit Jaako Licensed under the Apache License, Version 2.0 (the License); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0</string>
+    <string name="conbo_c">ConBo</string>
+    <string name="name_title">Name</string>
 </resources>
