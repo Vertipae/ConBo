@@ -29,13 +29,13 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
 
     Context mContext;
     ContactHelper mData;
-    //
+
 
     public ContactAdapter(Context mContext) {
         this.mContext = mContext;
         this.mData = ContactHelper.getInstance(mContext);
     }
-
+    // Initialize and inflate all the contact items to the contacts view
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -43,7 +43,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
         v = LayoutInflater.from(mContext).inflate(R.layout.contact_item, parent, false);
         final MyViewHolder vHolder = new MyViewHolder(v);
 
-
+        // Set onClickListener to listen for clicks on single item
         vHolder.contact_item.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -59,10 +59,12 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
         });
         return vHolder;
     }
-// Generate one row for recyclerview
+    // Fetch the data from database to be used in contact item in the contacts view
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
+        // Execute the query to fetch single item data
         ContactModel current = mData.query(position);
+        // Set the data to variables and text fields
         holder.setmId(current.getmId());
         holder.setmPhoto(current.getmPhoto());
         holder.tv_name.setText(current.getmName());
@@ -70,18 +72,19 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
         // Generate icon according to first letter of name
         TextDrawable letterDrawable = TextDrawable.builder().buildRound(String.valueOf(current.getmName().charAt(0)), holder.getmPhoto());
         holder.img.setImageDrawable(letterDrawable);
-        // Keep a reference to the view holder for the click listener
-        // final WordViewHolder h = holder; // needs to be final for use in callback
+
+
 
     }
-
+    // Count the entries in database
     @Override
     public int getItemCount() {
         return ((int) mData.count());
     }
 
+    // Custom holder for recyclerviewholder
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        //
+
         private LinearLayout contact_item;
         private TextView tv_name;
         private TextView tv_phone;
@@ -92,7 +95,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
         public MyViewHolder(View itemView) {
 
             super(itemView);
-            //
+
             contact_item = (LinearLayout) itemView.findViewById(R.id.contact_item_id);
             tv_name = (TextView) itemView.findViewById(R.id.contact_name);
             tv_phone = (TextView) itemView.findViewById(R.id.contact_phone);

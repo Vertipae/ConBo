@@ -22,7 +22,7 @@ public class FragmentContact extends Fragment{
 
     public FragmentContact() {
     }
-
+    // Inflate the view to screen and initialize variables
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

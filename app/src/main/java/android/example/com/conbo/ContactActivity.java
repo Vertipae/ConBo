@@ -77,30 +77,38 @@ public class ContactActivity extends AppCompatActivity {
                 mMenu.getItem(1).setVisible(true);
                 return true;
             case R.id.action_delete:
+                // Alert dialog for deleting
                 AlertDialog dialog = new AlertDialog.Builder(this).create();
                 dialog.setTitle("Are you sure?");
                 dialog.setMessage("This will permanently delete the contact");
                 dialog.setCancelable(false);
+                // Create button for positive answer and give it a new onclicklistener
                 dialog.setButton(DialogInterface.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                       mData.delete(mId);
-                       Toast.makeText(mContext, "Contact deleted successfully", Toast.LENGTH_SHORT).show();
-                       Intent intent = new Intent(mContext, MainActivity.class);
-                       mContext.startActivity(intent);
+                        // delete the wanted contact from database
+                        mData.delete(mId);
+                        Toast.makeText(mContext, "Contact deleted successfully", Toast.LENGTH_SHORT).show();
+                        // Go back to contacts view
+                        Intent intent = new Intent(mContext, MainActivity.class);
+                        mContext.startActivity(intent);
                     }
                 });
+                // Create button for negative anwser and give it a new onclicklistener
                 dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int buttonId) {
+                        // Cancel the dialog
                         dialog.cancel();
                     }
                 });
+                // Set icon for dialog and display it
                 dialog.setIcon(android.R.drawable.ic_dialog_alert);
                 dialog.show();
                 return true;
             case R.id.action_save:
-                // Save
+                // Update the given information to database
                 mData.update(mId, mName.getText().toString(), mPhone.getText().toString());
+                // Set edittext fields to be noneditable
                 mName.setFocusable(false);
                 mPhone.setFocusable(false);
                 // Save button invisible

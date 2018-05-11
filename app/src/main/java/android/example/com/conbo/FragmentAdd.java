@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * Created by Salinaattori on 9.5.2018.
+ * Created by Sallamaarit Jaako 1601459 on 9.5.2018.
  */
 
 public class FragmentAdd extends Fragment{
@@ -25,7 +25,7 @@ public class FragmentAdd extends Fragment{
 
     public FragmentAdd() {
     }
-
+    // Inflate the view to screen and initialize variables
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class FragmentAdd extends Fragment{
         mButton = vAdd.findViewById(R.id.add_button);
         mName = vAdd.findViewById(R.id.item_name_add);
         mPhone = vAdd.findViewById(R.id.item_phone_add);
-
+        // Set on onClickListener for save button
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,9 +1,9 @@
 package android.example.com.conbo;
 
 /**
- * Created by Salinaattori on 9.5.2018.
+ * Created by Sallamaarit Jaako 1601459 on 9.5.2018.
  */
-
+// Model for a Contact
 public class ContactModel {
 
     private String mName;

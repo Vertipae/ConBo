@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by Salinaattori on 9.5.2018.
+ * Created by Sallamaarit Jaako 1601459 on 9.5.2018.
  */
 
 public class FragmentAbout extends Fragment {
@@ -16,7 +16,7 @@ public class FragmentAbout extends Fragment {
 
     public FragmentAbout() {
     }
-
+    // Inflate the view to screen
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

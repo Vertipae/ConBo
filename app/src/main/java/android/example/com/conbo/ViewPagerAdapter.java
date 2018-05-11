@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Salinaattori on 9.5.2018.
+ * Created by Sallamaarit Jaako 1601459 on 9.5.2018.
  */
-
+// Adapter for showing tabs
 public class ViewPagerAdapter extends FragmentPagerAdapter{
 
     private final List<Fragment> lstFragment = new ArrayList<>();
