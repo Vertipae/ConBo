@@ -22,6 +22,8 @@ public class FragmentAdd extends Fragment{
     ContactHelper mData;
     TextView mName;
     TextView mPhone;
+    TextView mEmail;
+    TextView mAddress;
 
     public FragmentAdd() {
     }
@@ -34,11 +36,13 @@ public class FragmentAdd extends Fragment{
         mButton = vAdd.findViewById(R.id.add_button);
         mName = vAdd.findViewById(R.id.item_name_add);
         mPhone = vAdd.findViewById(R.id.item_phone_add);
+        mEmail = vAdd.findViewById(R.id.item_email_add);
+        mAddress = vAdd.findViewById(R.id.item_address_add);
         // Set on onClickListener for save button
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mData.insert(mName.getText().toString(), mPhone.getText().toString());
+                mData.insert(mName.getText().toString(), mPhone.getText().toString(), mEmail.getText().toString(), mAddress.getText().toString());
                 Intent intent = new Intent(vAdd.getContext(), MainActivity.class);
                 Toast.makeText(vAdd.getContext(),"Contact added successfully",Toast.LENGTH_SHORT).show();
                 vAdd.getContext().startActivity(intent);

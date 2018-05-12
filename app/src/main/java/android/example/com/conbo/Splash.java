@@ -37,6 +37,7 @@ public class Splash extends AppCompatActivity {
         Thread timer = new Thread() {
             public void run() {
                 try {
+                    // Here you adjust the loading screen time
                     sleep(3000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();

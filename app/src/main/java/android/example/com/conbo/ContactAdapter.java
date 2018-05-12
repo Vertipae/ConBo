@@ -52,6 +52,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
                 intent.putExtra("id", vHolder.getmId());
                 intent.putExtra("name", vHolder.tv_name.getText());
                 intent.putExtra("phone", vHolder.tv_phone.getText());
+                intent.putExtra("email", vHolder.getmEmail());
+                intent.putExtra("address", vHolder.getmAddress());
                 mContext.startActivity(intent);
 
 
@@ -69,6 +71,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
         holder.setmPhoto(current.getmPhoto());
         holder.tv_name.setText(current.getmName());
         holder.tv_phone.setText(current.getmPhone());
+        holder.setmEmail(current.getmEmail());
+        holder.setmAddress(current.getmAddress());
         // Generate icon according to first letter of name
         TextDrawable letterDrawable = TextDrawable.builder().buildRound(String.valueOf(current.getmName().charAt(0)), holder.getmPhoto());
         holder.img.setImageDrawable(letterDrawable);
@@ -91,6 +95,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
         private ImageView img;
         private int mId;
         private int mPhoto;
+        private String mEmail;
+        private String mAddress;
 
         public MyViewHolder(View itemView) {
 
@@ -116,6 +122,22 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
 
         public void setmPhoto(int mPhoto) {
             this.mPhoto = mPhoto;
+        }
+
+        public String getmEmail() {
+            return mEmail;
+        }
+
+        public void setmEmail(String mEmail) {
+            this.mEmail = mEmail;
+        }
+
+        public String getmAddress() {
+            return mAddress;
+        }
+
+        public void setmAddress(String mAddress) {
+            this.mAddress = mAddress;
         }
     }
 }

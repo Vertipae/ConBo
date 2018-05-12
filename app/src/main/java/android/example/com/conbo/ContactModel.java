@@ -10,20 +10,35 @@ public class ContactModel {
     private String mPhone;
     private int mId;
     private int mPhoto;
+    private String mEmail;
+    private String mAddress;
 
 
     public ContactModel() {
 
     }
 
-    public ContactModel(String name, String phone, int id, int photo) {
+    public ContactModel(String name, String phone, int id, int photo, String email, String address) {
         mName = name;
         mPhone = phone;
         mId = id;
         mPhoto = photo;
+        mEmail = email;
+        mAddress = address;
     }
 
     // Getters
+
+    public String getmEmail() {
+        return mEmail;
+    }
+
+
+    public String getmAddress() {
+        return mAddress;
+    }
+
+
     public String getmName() {
         return mName;
     }
@@ -40,9 +55,6 @@ public class ContactModel {
         return mPhoto;
     }
 
-    public void setmPhoto(int mPhoto) {
-        this.mPhoto = mPhoto;
-    }
 
     // Setters
     public void setmName(String name) {
@@ -55,5 +67,17 @@ public class ContactModel {
 
     public void setmId(int mId) {
         this.mId = mId;
+    }
+
+    public void setmAddress(String mAddress) {
+        this.mAddress = mAddress;
+    }
+
+    public void setmEmail(String mEmail) {
+        this.mEmail = mEmail;
+    }
+
+    public void setmPhoto(int mPhoto) {
+        this.mPhoto = mPhoto;
     }
 }

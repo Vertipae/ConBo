@@ -22,6 +22,8 @@ import android.widget.Toast;
 public class ContactActivity extends AppCompatActivity {
     EditText mName;
     EditText mPhone;
+    EditText mEmail;
+    EditText mAddress;
     int mId;
     Menu mMenu;
     ContactHelper mData;
@@ -42,14 +44,20 @@ public class ContactActivity extends AppCompatActivity {
         mData = ContactHelper.getInstance(this);
         mName = (EditText) findViewById(R.id.contact_name_single);
         mPhone = (EditText) findViewById(R.id.contact_phone_single);
+        mEmail = (EditText) findViewById(R.id.contact_email_single);
+        mAddress = (EditText) findViewById(R.id.contact_address_single);
         // Get extras from intent and set the values for textviews
         Bundle extras = getIntent().getExtras();
         mId = extras.getInt("id");
         mName.setText(extras.getString("name"));
         mPhone.setText(extras.getString("phone"));
+        mEmail.setText(extras.getString("email"));
+        mAddress.setText(extras.getString("address"));
         // Set edit text non editable
         mName.setFocusable(false);
         mPhone.setFocusable(false);
+        mEmail.setFocusable(false);
+        mAddress.setFocusable(false);
     }
 
     @Override
@@ -71,6 +79,8 @@ public class ContactActivity extends AppCompatActivity {
                 // Set edit text editable
                 mName.setFocusableInTouchMode(true);
                 mPhone.setFocusableInTouchMode(true);
+                mEmail.setFocusableInTouchMode(true);
+                mAddress.setFocusableInTouchMode(true);
                 // Set edit button invisible
                 item.setVisible(false);
                 // Set save button visible
@@ -107,10 +117,12 @@ public class ContactActivity extends AppCompatActivity {
                 return true;
             case R.id.action_save:
                 // Update the given information to database
-                mData.update(mId, mName.getText().toString(), mPhone.getText().toString());
+                mData.update(mId, mName.getText().toString(), mPhone.getText().toString(), mEmail.getText().toString(), mAddress.getText().toString());
                 // Set edittext fields to be noneditable
                 mName.setFocusable(false);
                 mPhone.setFocusable(false);
+                mEmail.setFocusable(false);
+                mAddress.setFocusable(false);
                 // Save button invisible
                 item.setVisible(false);
                 // Edit button visible

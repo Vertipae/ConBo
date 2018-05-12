@@ -32,10 +32,12 @@ public class ContactHelper extends SQLiteOpenHelper {
     public static final String KEY_NAME = "name";
     public static final String KEY_PHONE = "phone";
     public static final String KEY_PHOTO = "photo";
+    public static final String KEY_EMAIL = "email";
+    public static final String KEY_ADDRESS = "address";
 
 
     private static final String[] COLUMNS =
-            {KEY_ID, KEY_NAME, KEY_PHONE, KEY_PHOTO};
+            {KEY_ID, KEY_NAME, KEY_PHONE, KEY_PHOTO, KEY_EMAIL, KEY_ADDRESS};
 
     // Create table clause
     private static final String CONBO_TABLE_CREATE =
@@ -43,7 +45,9 @@ public class ContactHelper extends SQLiteOpenHelper {
                     KEY_ID + " INTEGER PRIMARY KEY, " +
                     KEY_NAME + " TEXT, " +
                     KEY_PHONE + " TEXT, " +
-                    KEY_PHOTO + " INTEGER);";
+                    KEY_PHOTO + " INTEGER, " +
+                    KEY_EMAIL + " TEXT, " +
+                    KEY_ADDRESS + " TEXT);";
 
     private SQLiteDatabase mWritableDB;
     private SQLiteDatabase mReadableDB;
@@ -75,8 +79,8 @@ public class ContactHelper extends SQLiteOpenHelper {
     public void fillDatabaseWithData(SQLiteDatabase db) {
         // Initialize an array of contact models and add to new models into it
         ContactModel[] contacts = new ContactModel[2];
-        contacts[0] = new ContactModel("Seppo", "0700123123", 0, ColorGenerator.MATERIAL.getRandomColor());
-        contacts[1] = new ContactModel("Sallamaarit", "020126126", 1, ColorGenerator.MATERIAL.getRandomColor());
+        contacts[0] = new ContactModel("Seppo", "0700123123", 0, ColorGenerator.MATERIAL.getRandomColor(), "Seppo@hotmale.com", "Kaljukuja 5, 0123123 Kuhala");
+        contacts[1] = new ContactModel("Sallamaarit", "020126126", 1, ColorGenerator.MATERIAL.getRandomColor(), "Sallamaarit.jaako@student.laurea.fi", "Otsonkuja 3");
         // Initialize values to be added to database
         ContentValues values = new ContentValues();
 
@@ -86,6 +90,8 @@ public class ContactHelper extends SQLiteOpenHelper {
             values.put(KEY_NAME, contacts[i].getmName());
             values.put(KEY_PHONE, contacts[i].getmPhone());
             values.put(KEY_PHOTO, contacts[i].getmPhoto());
+            values.put(KEY_EMAIL, contacts[i].getmEmail());
+            values.put(KEY_ADDRESS, contacts[i].getmAddress());
             db.insert(CONBO_TABLE, null, values);
         }
     }
@@ -112,6 +118,8 @@ public class ContactHelper extends SQLiteOpenHelper {
             entry.setmName(cursor.getString(cursor.getColumnIndex(KEY_NAME)));
             entry.setmPhone(cursor.getString(cursor.getColumnIndex(KEY_PHONE)));
             entry.setmPhoto(cursor.getInt(cursor.getColumnIndex(KEY_PHOTO)));
+            entry.setmEmail(cursor.getString(cursor.getColumnIndex(KEY_EMAIL)));
+            entry.setmAddress(cursor.getString(cursor.getColumnIndex(KEY_ADDRESS)));
         } catch (Exception e) {
             Log.d(TAG, "QUERY EXCEPTION! " + e.getMessage());
         } finally {
@@ -132,13 +140,15 @@ public class ContactHelper extends SQLiteOpenHelper {
     }
 
     // Clause for inserting data into database
-    public long insert(String name, String phone) {
+    public long insert(String name, String phone, String email, String address) {
         long newId = 0;
         // Initialize values and enter the given data
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, name);
         values.put(KEY_PHONE, phone);
         values.put(KEY_PHOTO, ColorGenerator.MATERIAL.getRandomColor());
+        values.put(KEY_EMAIL, email);
+        values.put(KEY_ADDRESS, address);
         try {
             // Check if writable database already initialized
             if (mWritableDB == null) {
@@ -154,7 +164,7 @@ public class ContactHelper extends SQLiteOpenHelper {
     }
 
     // Clause for updating a row in database
-    public int update(int id, String name, String phone) {
+    public int update(int id, String name, String phone, String email, String address) {
         int mNumberOfRowsUpdated = -1;
         try {
             // Check if writable database already initialized
@@ -165,6 +175,8 @@ public class ContactHelper extends SQLiteOpenHelper {
             ContentValues values = new ContentValues();
             values.put(KEY_NAME, name);
             values.put(KEY_PHONE, phone);
+            values.put(KEY_EMAIL, email);
+            values.put(KEY_ADDRESS, address);
             // Save the updated row to the database
             mNumberOfRowsUpdated = mWritableDB.update(CONBO_TABLE,
                     values,
