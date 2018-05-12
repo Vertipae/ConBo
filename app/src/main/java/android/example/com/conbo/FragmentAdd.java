@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Sallamaarit Jaako 1601459 on 9.5.2018.
  */
@@ -42,10 +45,23 @@ public class FragmentAdd extends Fragment{
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mData.insert(mName.getText().toString(), mPhone.getText().toString(), mEmail.getText().toString(), mAddress.getText().toString());
-                Intent intent = new Intent(vAdd.getContext(), MainActivity.class);
-                Toast.makeText(vAdd.getContext(),"Contact added successfully",Toast.LENGTH_SHORT).show();
-                vAdd.getContext().startActivity(intent);
+                // Initialize validator
+                Validator validator = new Validator();
+                // Initialize and enter values to list
+                List<String> values = new ArrayList<>();
+                values.add(mName.getText().toString());
+                values.add(mPhone.getText().toString());
+                values.add(mEmail.getText().toString());
+                values.add(mAddress.getText().toString());
+                // Validate values and return if empty fields
+                if (!validator.validate(values)) {
+                    Toast.makeText(getContext(), "Please fill all fields!", Toast.LENGTH_SHORT).show();
+                }else {
+                    mData.insert(mName.getText().toString(), mPhone.getText().toString(), mEmail.getText().toString(), mAddress.getText().toString());
+                    Intent intent = new Intent(vAdd.getContext(), MainActivity.class);
+                    Toast.makeText(vAdd.getContext(), "Contact added successfully", Toast.LENGTH_SHORT).show();
+                    vAdd.getContext().startActivity(intent);
+                }
             }
         });
         return vAdd;

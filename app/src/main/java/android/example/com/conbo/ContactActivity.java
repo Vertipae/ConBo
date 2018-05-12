@@ -19,6 +19,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ContactActivity extends AppCompatActivity {
     EditText mName;
     EditText mPhone;
@@ -116,6 +119,19 @@ public class ContactActivity extends AppCompatActivity {
                 dialog.show();
                 return true;
             case R.id.action_save:
+                // Initialize validator
+                Validator validator = new Validator();
+                // Initialize and enter values to list
+                List<String> values = new ArrayList<>();
+                values.add(mName.getText().toString());
+                values.add(mPhone.getText().toString());
+                values.add(mEmail.getText().toString());
+                values.add(mAddress.getText().toString());
+                // Validate values and return if empty fields
+                if (!validator.validate(values)) {
+                    Toast.makeText(this, "Please fill all fields!", Toast.LENGTH_SHORT).show();
+                    return false;
+                }
                 // Update the given information to database
                 mData.update(mId, mName.getText().toString(), mPhone.getText().toString(), mEmail.getText().toString(), mAddress.getText().toString());
                 // Set edittext fields to be noneditable
