@@ -41,6 +41,7 @@
             android:id="@+id/item_phone_add"
             android:layout_width="320dp"
             android:textColor="#FFFFFF"
+            android:inputType="phone"
             android:layout_height="wrap_content"
             android:textColorLink="#B9F6CA" />
     </android.support.design.widget.TextInputLayout>
